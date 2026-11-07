@@ -1,0 +1,21 @@
+body { margin: 0; font-family: system-ui, sans-serif; background: #f4f5f7; color: #111827; }
+.page { max-width: 960px; margin: 0 auto; padding: 32px 16px; }
+h1 { margin-bottom: 4px; }
+.sub { color: #6b7280; margin-top: 0; }
+.uploads { display: flex; gap: 16px; flex-wrap: wrap; margin: 24px 0 16px; }
+.card { flex: 1; min-width: 260px; background: #fff; border: 2px dashed #d1d5db; border-radius: 12px;
+  padding: 16px; display: flex; flex-direction: column; gap: 8px; cursor: pointer; }
+.card span { font-weight: 600; }
+.verify { background: #2563eb; color: #fff; border: 0; border-radius: 8px; padding: 12px 28px;
+  font-size: 16px; cursor: pointer; }
+.verify:disabled { background: #9ca3af; cursor: not-allowed; }
+.error { margin-top: 16px; background: #fee2e2; color: #991b1b; padding: 12px; border-radius: 8px; }
+.result { margin-top: 20px; background: #fff; border-radius: 12px; padding: 16px; }
+.badge { display: inline-block; padding: 6px 16px; border-radius: 999px; font-weight: 700; }
+.badge.ok { background: #dcfce7; color: #166534; }
+.badge.bad { background: #fee2e2; color: #991b1b; }
+.badge.warn { background: #fef3c7; color: #92400e; }
+.meta { color: #6b7280; margin: 4px 0; }
+.previews { display: flex; gap: 24px; flex-wrap: wrap; margin-top: 24px; align-items: flex-start; }
+.doc-canvas { max-width: 560px; width: 100%; border: 1px solid #e5e7eb; border-radius: 8px; background: #fff; }
+.ref-img { max-width: 300px; width: 100%; border: 1px solid #e5e7eb; border-radius: 8px; background: #fff; }
