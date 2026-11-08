@@ -14,7 +14,10 @@ ALGORITHM = "HS256"
 TOKEN_MINUTES = int(os.getenv("JWT_MINUTES", "60"))
 DB_PATH = Path(os.getenv("DATA_DIR", "./data")) / "users.db"
 
-oauth2_scheme = OAuth2PasswordBearer(tokenUrl="/auth/login")
+# Behind nginx the API lives under /api (ROOT_PATH=/api), so Swagger's
+# Authorize button must call /api/auth/login. Locally ROOT_PATH is empty.
+ROOT_PATH = os.getenv("ROOT_PATH", "")
+oauth2_scheme = OAuth2PasswordBearer(tokenUrl=f"{ROOT_PATH}/auth/login")
 
 
 def _conn() -> sqlite3.Connection:
