@@ -11,6 +11,7 @@ services:
       - REDIS_URL=redis://redis:6379/0
       - DATA_DIR=/data
       - JWT_SECRET=${JWT_SECRET}
+      - ROOT_PATH=/api
     volumes:
       - jobdata:/data
     depends_on:

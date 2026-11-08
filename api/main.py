@@ -1,3 +1,5 @@
+import os
+
 from fastapi import Depends, FastAPI, File, HTTPException, UploadFile
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.security import OAuth2PasswordRequestForm
@@ -14,7 +16,13 @@ from models import similarity as sim_model
 from models.detector import detect, get_session as get_detector_session
 from models.similarity import compute_similarity
 
-app = FastAPI(title="Signature API", version="0.6.0")
+# Behind nginx the API is served under /api, so ROOT_PATH=/api on the server.
+# Locally ROOT_PATH is empty, so http://localhost:8000/docs works as before.
+app = FastAPI(
+    title="Signature API",
+    version="0.6.0",
+    root_path=os.getenv("ROOT_PATH", ""),
+)
 
 app.add_middleware(
     CORSMiddleware, allow_origins=["*"], allow_methods=["*"], allow_headers=["*"]
