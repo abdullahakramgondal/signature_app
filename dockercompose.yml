@@ -1,23 +1,21 @@
 services:
   redis:
     image: redis:7
-    ports:
-      - "6379:6379"
+    restart: unless-stopped
 
   api:
     build:
       context: .
       dockerfile: docker/Dockerfile
-    ports:
-      - "8000:8000"
     environment:
       - REDIS_URL=redis://redis:6379/0
       - DATA_DIR=/data
-      - JWT_SECRET=change-this-to-a-long-random-string
+      - JWT_SECRET=${JWT_SECRET}
     volumes:
       - jobdata:/data
     depends_on:
       - redis
+    restart: unless-stopped
 
   worker:
     build:
@@ -31,16 +29,18 @@ services:
       - jobdata:/data
     depends_on:
       - redis
+    restart: unless-stopped
 
   frontend:
     build:
       context: ./frontend
       args:
-        VITE_API_URL: http://localhost:8000
+        VITE_API_URL: /api
     ports:
-      - "3000:80"
+      - "80:80"
     depends_on:
       - api
+    restart: unless-stopped
 
 volumes:
   jobdata:
