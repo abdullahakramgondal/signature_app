@@ -3,6 +3,7 @@
 Preprocessing matches training:
 grayscale -> 3 channels, centered letterbox, padding value 114, no normalization.
 """
+from models.fetch_models import ensure_models
 from pathlib import Path
 from typing import Optional
 
@@ -23,6 +24,7 @@ _session = None
 def get_session() -> ort.InferenceSession:
     global _session
     if _session is None:
+        ensure_models()
         if not DETECTOR_PATH.exists():
             raise FileNotFoundError(f"Model not found: {DETECTOR_PATH}")
         _session = ort.InferenceSession(

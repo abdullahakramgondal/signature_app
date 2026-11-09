@@ -10,3 +10,4 @@ redis
 rq
 PyJWT
 bcrypt
+boto3

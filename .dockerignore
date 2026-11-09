@@ -5,3 +5,4 @@ training
 frontend
 docs
 .git
+models/weights
