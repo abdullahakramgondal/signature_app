@@ -11,6 +11,7 @@ services:
       - REDIS_URL=redis://redis:6379/0
       - DATA_DIR=/data
       - JWT_SECRET=${JWT_SECRET}
+      - LOGFIRE_TOKEN=${LOGFIRE_TOKEN}
       - ROOT_PATH=/api
       - MODEL_BUCKET=signature-app-models-abdullah-295392292084-ap-southeast-2-an
       - AWS_REGION=ap-southeast-2

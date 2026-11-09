@@ -11,3 +11,4 @@ rq
 PyJWT
 bcrypt
 boto3
+logfire[fastapi]

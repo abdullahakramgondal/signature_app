@@ -1,5 +1,6 @@
 import os
 
+import logfire
 from fastapi import Depends, FastAPI, File, HTTPException, UploadFile
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.security import OAuth2PasswordRequestForm
@@ -16,6 +17,10 @@ from models import similarity as sim_model
 from models.detector import detect, get_session as get_detector_session
 from models.similarity import compute_similarity
 
+# Monitoring: sends traces to Logfire when LOGFIRE_TOKEN is set (server).
+# Without a token (local runs) nothing is sent and nothing breaks.
+logfire.configure(service_name="signature-api", console=False)
+
 # Behind nginx the API is served under /api, so ROOT_PATH=/api on the server.
 # Locally ROOT_PATH is empty, so http://localhost:8000/docs works as before.
 app = FastAPI(
@@ -27,6 +32,8 @@ app = FastAPI(
 app.add_middleware(
     CORSMiddleware, allow_origins=["*"], allow_methods=["*"], allow_headers=["*"]
 )
+
+logfire.instrument_fastapi(app)
 
 
 @app.on_event("startup")
